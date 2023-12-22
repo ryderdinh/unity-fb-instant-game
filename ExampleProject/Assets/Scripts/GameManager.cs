@@ -2,21 +2,18 @@ using BZ_FIG_SDK.Scripts;
 using Manager;
 using UnityEngine;
 
-namespace DefaultNamespace
+public class GameManager : MonoBehaviour
 {
-    public class GameManager : MonoBehaviour
+    public void OnClickLoadedUserData(bool show)
     {
-        public void OnClickLoadedUserData(bool show)
-        {
-            WrapManager.Instance.SetLoadedData(1);
+        WrapManager.Instance.SetLoadedData(1);
             
             
-        }
+    }
 
-        public void OnClickLoadGame()
-        {
-            // Call when loaded user data. Example:
-            BZ_FIG_MANAGER.Instance.LoadGameAfterLoadData();
-        }
+    public void OnClickLoadGame()
+    {
+        // Call when loaded user data. Example:
+        BZ_FIG_MANAGER.Instance.LoadGameAfterLoadData();
     }
 }
