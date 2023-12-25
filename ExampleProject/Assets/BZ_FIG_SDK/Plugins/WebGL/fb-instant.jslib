@@ -113,15 +113,15 @@ let lib = {
 			rewardAd
 				.showAsync()
 				.then(() => {
-					rewardAd = null
 					SendMessage('WrapManager', 'onRewardedAdSuccess')
+					rewardAd = null
 				})
 				.catch(err => {
-					rewardAd = null
 					if (typeof err == 'object' && 'code' in err) {
 						SendMessage('WrapManager', 'onRewardedAdFailed', err.code)
 					}
 					console.log(err)
+					rewardAd = null
 				})
 		} else {
 			let rewardAdInstance = null
@@ -164,8 +164,8 @@ let lib = {
 			interstitialAd
 				.showAsync()
 				.then(() => {
-					interstitialAd = null
 					SendMessage('WrapManager', 'onInterstitialAdSuccess')
+					interstitialAd = null
 				})
 				.catch(() => {
 					console.log('showInterstitialAdErr:')
@@ -187,7 +187,7 @@ let lib = {
 				.then(() => SendMessage('WrapManager', 'onInterstitialAdSuccess'))
 				.catch(err => {
 					SendMessage('WrapManager', 'onInterstitialAdFailed')
-					console.log('preloadInterstitialAdErr:')
+					console.log('InterstitialAdErr:')
 					console.error(err)
 				})
 		}

@@ -133,32 +133,31 @@
 
 		<script>
 			function saveUserId(callback) {
-				const id = FBInstant.player.getID()
-				const avatar = FBInstant.player.getPhoto()
-				const locale = FBInstant.getLocale()
-				const playerName = FBInstant.player.getName()
-
-				var headers = new Headers()
-				headers.append('Content-Type', 'application/json')
-				let requestOptions = {
-					method: 'POST',
-					headers,
-					body: JSON.stringify({
-						id,
-						avatar,
-						locale,
-						name: playerName
-					}),
-					redirect: 'follow'
-				}
-
-				const url = `${apiURI}/users`
 				if (apiURI) {
+					const id = FBInstant.player.getID()
+					const avatar = FBInstant.player.getPhoto()
+					const locale = FBInstant.getLocale()
+					const playerName = FBInstant.player.getName()
+
+					var headers = new Headers()
+					headers.append('Content-Type', 'application/json')
+					const requestOptions = {
+						method: 'POST',
+						headers,
+						body: JSON.stringify({
+							id,
+							avatar,
+							locale,
+							name: playerName
+						}),
+						redirect: 'follow'
+					}
+					const url = `${apiURI}/users`
+
 					fetch(url, requestOptions)
 						.then(response => response.json())
 						.then(result => {
 							console.log('Init user on cloud: ', result.message)
-							gameInstance.SendMessage('UserData', 'InitUid', id)
 							if (result.message === 'User existed') {
 								callback()
 								return
@@ -181,66 +180,11 @@
 
 			function initUserData() {
 				const userDataList = [
+					// //Example
 					// {
 					// 	name: 'is_Sound',
 					// 	default: 1
 					// },
-					// {
-					// 	name: 'is_Music',
-					// 	default: 1
-					// },
-					{
-						name: 'currentLevel',
-						default: 1
-					},
-					{
-						name: 'userDataCoin',
-						default: 0
-					},
-					{
-						name: 'buySlotFree',
-						default: 0
-					},
-					{
-						name: 'count_spinning',
-						default: 1
-					},
-					{
-						name: 'current_chest_progress',
-						default: 0
-					},
-					{
-						name: 'isNewUser',
-						default: 0
-					},
-					{
-						name: 'isNewUserRelease',
-						default: 0
-					},
-					{
-						name: 'LevelDataFile',
-						default: ''
-					},
-					{
-						name: 'PowerDataFile',
-						default: ''
-					},
-					{
-						name: 'ThemeDataFile',
-						default: ''
-					},
-					{
-						name: 'DailyDataFile',
-						default: ''
-					},
-					{
-						name: 'TutDataFile',
-						default: ''
-					},
-					{
-						name: 'DailySpinFile',
-						default: ''
-					}
 				]
 
 				// Init User Data in Unity
@@ -251,7 +195,7 @@
 							let value
 
 							gameInstance.SendMessage(
-								'UserData',
+								'<object-name>',
 								`Init${_.name}`,
 								value || _.default
 							)
@@ -261,23 +205,13 @@
 								gameInstance.SendMessage('GameManager', `LoadGameAfterLoadData`)
 
 								setTimeout(() => {
-									gameInstance.SendMessage('GameManager', `SetLoadedData`, 1)
+									gameInstance.SendMessage('WrapManager', `SetLoadedData`, 1)
 								}, 1500)
 							}
 						})
 
-						console.log('UserData: ', data)
+						console.log('User Data: ', data)
 					})
-			}
-
-			function initCurrentContext() {
-				let contextType = FBInstant.context.getType()
-				let sourceName = getSourceName()
-				gameInstance.SendMessage(
-					'UserData',
-					'InitCurrentContext',
-					`${contextType}:${sourceName}`
-				)
 			}
 
 			function handleCurrentContext(
@@ -322,7 +256,7 @@
 									}
 
 									gameInstance.SendMessage(
-										'UserData',
+										'BZ_FIG_DATA',
 										'InitCurrentContext',
 										JSON.stringify(contextData)
 									)
@@ -338,7 +272,7 @@
 								})
 								.catch(() => {
 									gameInstance.SendMessage(
-										'UserData',
+										'BZ_FIG_DATA',
 										'InitCurrentContext',
 										JSON.stringify(contextData)
 									)
@@ -476,12 +410,6 @@
 					.then(() => {
 						FBInstant.startGameAsync()
 							.then(function () {
-								// let contextId = FBInstant.context.getID()
-								// let contextType = FBInstant.context.getType()
-								// let playerName = FBInstant.player.getName()
-								// let playerPic = FBInstant.player.getPhoto()
-								// let playerId = FBInstant.player.getID()
-
 								// Init unity user data
 								initUserData(gameInstance)
 

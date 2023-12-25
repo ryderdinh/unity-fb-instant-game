@@ -29,6 +29,11 @@ namespace Manager
         public Action shareSuccess = arrowFunc;
         public Action switchAsyncSuccess = arrowFunc;
 
+        public void Test()
+        {
+            Debug.Log("OK!");
+        }
+
         public void setShareAction(Action func1 = null, Action func2 = null)
         {
             shareSuccess = func1;

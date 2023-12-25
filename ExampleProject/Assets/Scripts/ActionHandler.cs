@@ -1,5 +1,6 @@
 using BZ_FIG_SDK.Scripts;
 using Manager;
+using TMPro;
 using UnityEngine;
 
 public class ActionHandler : MonoBehaviour
@@ -7,8 +8,11 @@ public class ActionHandler : MonoBehaviour
     private const string FakeDataContextJSONString =
         "{\"id\":\"7029677243815790\",\"type\":\"THREAD:embedded_player\",\"tournament\":{\"id_tour\":\"7029677243815790\",\"tour_name\":\"The World Fruit Merge Tournament\",\"payload\":null,\"start_at\":null,\"end_at\":1702607733,\"is_current\":false},\"players\":[{\"id\":\"6294019030699433\",\"name\":\"Hằng\",\"photo\":\"https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2554059101416284&gaming_photo_type=unified_picture&ext=1704253829&hash=AfrfylPxbrmJI271n7zQh1tiFBolP71WGlk4F4icaMXkcA\"},{\"id\":\"6876170049105548\",\"name\":\"Chinhs\",\"photo\":\"https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=7047637455296753&gaming_photo_type=unified_picture&ext=1704253829&hash=AfqrR-Ylap1TyrkVNcOFzvrdHyDSHK5oaFtE-Cyg05Q6YQ\"},{\"id\":\"6818573238225015\",\"name\":\"Quang Anh\",\"photo\":\"https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=3614266968816894&gaming_photo_type=unified_picture&ext=1704253829&hash=Afp-u_JkQPVEXfTHXZ4oh8ua1ZGmfUgCYezzZSWFTBWUiQ\"},{\"id\":\"6843480775699313\",\"name\":\"Ivonne\",\"photo\":\"https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=724251436390753&gaming_photo_type=unified_picture&ext=1704253829&hash=AfpPsCuiIjW2_Cgi6L4WzDE24LDmcGIfy-ky1bwzAA6URg\"},{\"id\":\"7334121979944604\",\"name\":\"Tilda\",\"photo\":\"https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1090589895640479&gaming_photo_type=unified_picture&ext=1704253829&hash=AfrQn_zPTXkkLE1GOy7sLvpD1RIY3oN5V3fhyvya3lG-Pw\"},{\"id\":\"7825357360856764\",\"name\":\"Tr-Ngọc\",\"photo\":\"https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2247252365468145&gaming_photo_type=unified_picture&ext=1704253829&hash=Afr8KCHEFkwFcOWQi3XT0nfl5x5arnAD8Y7GWwV7QI-8IA\"},{\"id\":\"7131588376899698\",\"name\":\"Bùi\",\"photo\":\"https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2844002932409360&gaming_photo_type=unified_picture&ext=1704253829&hash=Afoa46Hocp70g5XaJySytLDrXF3Bh7ilna-4TOcHjFKseQ\"}]}";
 
+    [SerializeField] private TextMeshProUGUI _infoTxt;
+
     private void Start()
     {
+        _infoTxt.text = "No context found";
     }
 
     public void OnClickInvite()
@@ -71,8 +75,10 @@ public class ActionHandler : MonoBehaviour
             );
         });
 
+        // Enter context id
+        const string contextId = "7029677243815790";
         Ryder.Instance.CheckUnityEditor(
-            () => WrapManager.switchAsync("7029677243815790"),
+            () => WrapManager.switchAsync(contextId),
             () => { WrapManager.Instance.OnSwitchAsyncSuccess(); }
         );
     }
@@ -89,5 +95,12 @@ public class ActionHandler : MonoBehaviour
         if (!BZ_FIG_DATA.Instance.FbContext.IsInTournament()) return;
 
         WrapManager.postTournamentScore(1234);
+    }
+
+    public void OnClickShareTournament()
+    {
+        if (!BZ_FIG_DATA.Instance.FbContext.IsInTournament()) return;
+
+        WrapManager.shareTournament();
     }
 }
