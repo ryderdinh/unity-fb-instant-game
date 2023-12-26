@@ -53,7 +53,7 @@ namespace BZ_FIG_SDK.Scripts
 
             switch (randomNumber)
             {
-                case 3:
+                case 1:
                     PreloadAdsInterstitial();
                     break;
             }
