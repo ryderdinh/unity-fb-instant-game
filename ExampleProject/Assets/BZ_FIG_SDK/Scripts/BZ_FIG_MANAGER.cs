@@ -18,7 +18,7 @@ namespace BZ_FIG_SDK.Scripts
         {
             AdsManager.Instance.ShowBannerAd(true);
             AdsManager.Instance.RandomRunAdsInterstitial();
-            AdsManager.Instance.PreloadAdsInterstitial();
+            AdsManager.Instance.PreloadAdsRewarded();
             // Edit function if you need (don't edit parameter)...
             // ...
         }
