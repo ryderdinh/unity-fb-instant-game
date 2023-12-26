@@ -13,7 +13,7 @@ public class ActionHandler : MonoBehaviour
 
     private void Start()
     {
-        RefreshUI()
+        RefreshUI();
     }
 
     private void RefreshUI()
@@ -83,7 +83,7 @@ public class ActionHandler : MonoBehaviour
                 () =>
                 {
                     BZ_FIG_DATA.Instance.InitCurrentContext(FakeDataContextJSONString);
-                    _infoContextTxt.text = "You are in tournament";
+                    RefreshUI();
                 }
             );
         });
@@ -114,12 +114,12 @@ public class ActionHandler : MonoBehaviour
     {
         if (!BZ_FIG_DATA.Instance.FbContext.IsInTournament()) return;
 
-        WrapManager.shareTournament();
+        WrapManager.shareTournament(123);
     }
 
     public void OnClickClaimCoin()
     {
         UserData.coin += 10;
-        _infoCoinTxt.text = ""
+        RefreshUI();
     }
 }

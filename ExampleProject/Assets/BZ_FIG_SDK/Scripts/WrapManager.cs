@@ -207,7 +207,7 @@ namespace Manager
         public static extern void updateUserDataToCloud();
         
         [DllImport("__Internal")]
-        public static extern void shareTournament();
+        public static extern void shareTournament(int score);
         
         [DllImport("__Internal")]
         public static extern void postTournamentScore(int score, int HIGHER_IS_BETTER = 1);
@@ -291,7 +291,7 @@ namespace Manager
         {
         }
 
-        public static void shareTournament()
+        public static void shareTournament(int score)
         {
         }
 
