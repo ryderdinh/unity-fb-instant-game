@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     {
         // Call when loaded user data. Example:
         BZ_FIG_MANAGER.Instance.LoadGameAfterLoadData();
+
+        WrapManager.Instance.setOnPause(() => { UIManager.Instance.ShowPopupPause(); });
     }
 
     private void LoadAsync()

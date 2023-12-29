@@ -122,4 +122,9 @@ public class ActionHandler : MonoBehaviour
         UserData.coin += 10;
         RefreshUI();
     }
+
+    public void OnClickPauseGame()
+    {
+        UIManager.Instance.ShowPopupPause();
+    }
 }

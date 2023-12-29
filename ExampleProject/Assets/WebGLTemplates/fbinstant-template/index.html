@@ -180,11 +180,11 @@
 
 			function initUserData() {
 				const userDataList = [
-					// //Example
-					// {
-					// 	name: 'is_Sound',
-					// 	default: 1
-					// },
+					//Example
+					{
+						name: 'Coin',
+						default: 0
+					},
 				]
 
 				// Init User Data in Unity
@@ -195,7 +195,7 @@
 							let value
 
 							gameInstance.SendMessage(
-								'<object-name>',
+								'UserData',
 								`Init${_.name}`,
 								value || _.default
 							)

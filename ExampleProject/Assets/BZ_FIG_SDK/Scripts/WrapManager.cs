@@ -28,6 +28,7 @@ namespace Manager
         public Action shareFailed = arrowFunc;
         public Action shareSuccess = arrowFunc;
         public Action switchAsyncSuccess = arrowFunc;
+        public Action onPause = arrowFunc;
 
         public void Test()
         {
@@ -105,6 +106,12 @@ namespace Manager
         public void pauseGame()
         {
             // Handle when call pause
+            onPause();
+        }
+
+        public void setOnPause(Action func)
+        {
+            onPause = func;
         }
 
         public void setCreateTournamentAction(Action func1 = null)
